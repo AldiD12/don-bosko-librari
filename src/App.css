@@ -1,0 +1,162 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+
+
+.hero-section {
+  background-image: url('SHELF.jpg'); /* Replace with your actual image */
+  background-size: cover; /* Cover the whole viewport */
+  background-position: center center; /* Center the image */
+  height: 100vh; /* Full height of the viewport */
+  width: 100%; /* Full width */
+  position: relative; /* Ensure proper positioning of the overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Prevent scrolling or overflow */
+}
+.logo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* Overlay for contrast */
+  position: absolute; /* Position the overlay over the background */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* Ensure overlay stays above the image */
+}
+.btn {
+  transition: all 0.3s ease;
+}
+
+.titulli{
+  background-image: url(oneshelf.jpeg);
+  opacity:90% ;
+  font-size: 45px;
+  font-weight: 600;
+}
+
+.container {
+  position: relative;
+  z-index: 2; /* Ensure text stays above the overlay */
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+
+.card {
+  animation: slide-in-left 1s ease-out;
+}
+
+p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  max-width: 600px; /* Max width of the search bar */
+  width: 100%;
+}
+
+.form-control {
+  font-size: 1.1rem; /* Slightly larger input text */
+}
+
+.btn-warning {
+  font-size: 1.1rem;
+  padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    font-size: 1rem;
+  }
+
+  .btn-warning {
+    font-size: 1rem;
+  }
+}
+
+
+
+.list-group-item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #bb946e;
+  color: #4c4c4c;
+}
+
+.list-group-item.active {
+  background-color: #e6e6e6 !important;
+  color: #4c4c4c !important;
+  font-weight: bold;
+}
+
+/* Container Animation */
+.container {
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Category Buttons */
+button {
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-5px);
+}
+
+/* Search Bar Animation (if any) */
+.search-bar {
+  transition: transform 0.2s ease;
+}
+
+.search-bar:focus {
+  transform: scale(1.05);
+}
+
+/* Responsive Animation for Cards */
+@media (max-width: 767px) {
+  .card {
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+}
