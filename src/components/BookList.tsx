@@ -5,14 +5,25 @@ import './BookList.css';
 
 // Define the Book interface
 interface Book {
-  "Nr.": number | string;
+  "Nr."?: number | string;
+  "NR."?: number | string;
   Titulli?: string;
+  "TITULLI"?: string;
   Autori?: string;
+  "AUTORI"?: string;
   "Shtepia_Botuese"?: string;
+  "SHTEPIA BOTUESE"?: string;
+  "Shtepia botuese"?: string;
   "Viti_I_Botimit"?: number | string;
+  "VITI I BOTIMIT"?: number | string;
+  "Viti i botimit"?: number | string;
   "Nr_Faqe"?: number | string;
+  "NR FAQE"?: number | string;
+  "Nr faqe"?: number | string;
   Cmimi?: string | number;
+  "CMIMI"?: string | number;
   Kategorizimi?: string;
+  "KATEGORIZIMI"?: string;
 }
 
 interface CategorizedBooks {
@@ -36,19 +47,36 @@ const BookList: React.FC<BookListProps> = ({ initialBooks = [], setFilteredBooks
     setFilteredBooks([]); // Clear search results when changing category
   };
 
+  // Filter out categories that are "Jo" or empty
+  const filteredCategories = Object.keys(categorizedBooks)
+    .filter(category => category !== "Jo" && category.trim() !== "")
+    .reduce((acc, category) => {
+      acc[category] = categorizedBooks[category];
+      return acc;
+    }, {} as { [key: string]: Book[] });
+
+  const allCategories: { [key: string]: Book[] } = {
+    "Te Gjitha": Object.values(filteredCategories).flat(),
+    ...filteredCategories
+  };
+
   // Filter search results by category if needed
   const displayBooks = initialBooks.length > 0 
     ? (selectedCategory === 'Te Gjitha'
-      ? initialBooks
-      : initialBooks.filter(book => book.Kategorizimi === selectedCategory))
+      ? initialBooks.filter(book => {
+          const bookCategory = book.Kategorizimi || book.KATEGORIZIMI;
+          return bookCategory && bookCategory !== "Jo";
+        })
+      : initialBooks.filter(book => (book.Kategorizimi || book.KATEGORIZIMI) === selectedCategory))
     : (selectedCategory === 'Te Gjitha'
-      ? Object.values(categorizedBooks).flat()
-      : categorizedBooks[selectedCategory] || []);
-
-  const allCategories: { [key: string]: Book[] } = {
-    "Te Gjitha": Object.values(categorizedBooks).flat(),
-    ...categorizedBooks
-  };
+      ? Object.values(filteredCategories).flat().filter(book => {
+          const bookCategory = book.Kategorizimi || book.KATEGORIZIMI;
+          return bookCategory && bookCategory !== "Jo";
+        })
+      : (filteredCategories[selectedCategory] || []).filter(book => {
+          const bookCategory = book.Kategorizimi || book.KATEGORIZIMI;
+          return bookCategory && bookCategory !== "Jo";
+        }));
 
   console.log('Initial Books:', initialBooks); // Debug log
   console.log('Display Books:', displayBooks); // Debug log

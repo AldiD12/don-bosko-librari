@@ -6,14 +6,25 @@ import SHELF from '../assets/SHELF.jpg';
 import libraryData from '../assets/librat.json';
 
 interface Book {
-  "Nr.": number | string;
+  "Nr."?: number | string;
+  "NR."?: number | string;
   Titulli?: string;
+  "TITULLI"?: string;
   Autori?: string;
+  "AUTORI"?: string;
   "Shtepia_Botuese"?: string;
+  "SHTEPIA BOTUESE"?: string;
+  "Shtepia botuese"?: string;
   "Viti_I_Botimit"?: number | string;
+  "VITI I BOTIMIT"?: number | string;
+  "Viti i botimit"?: number | string;
   "Nr_Faqe"?: number | string;
+  "NR FAQE"?: number | string;
+  "Nr faqe"?: number | string;
   Cmimi?: string | number;
+  "CMIMI"?: string | number;
   Kategorizimi?: string;
+  "KATEGORIZIMI"?: string;
 }
 
 interface HeroSectionProps {
@@ -51,9 +62,9 @@ const Hero: React.FC<HeroSectionProps> = ({
     const allBooks = Object.values(libraryData as CategorizedBooks).flat();
     
     const filtered = allBooks.filter(book => 
-      book.Titulli?.toLowerCase().includes(searchTerm) ||
-      book.Autori?.toLowerCase().includes(searchTerm) ||
-      book.Shtepia_Botuese?.toLowerCase().includes(searchTerm)
+      (book.Titulli || book.TITULLI)?.toLowerCase().includes(searchTerm) ||
+      (book.Autori || book.AUTORI)?.toLowerCase().includes(searchTerm) ||
+      (book.Shtepia_Botuese || book["SHTEPIA BOTUESE"] || book["Shtepia botuese"])?.toLowerCase().includes(searchTerm)
     );
 
     setFilteredBooks(filtered);

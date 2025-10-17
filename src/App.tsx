@@ -5,14 +5,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 interface Book {
-  "Nr.": number | string;
+  "Nr."?: number | string;
+  "NR."?: number | string;
   Titulli?: string;
+  "TITULLI"?: string;
   Autori?: string;
+  "AUTORI"?: string;
   "Shtepia_Botuese"?: string;
+  "SHTEPIA BOTUESE"?: string;
+  "Shtepia botuese"?: string;
   "Viti_I_Botimit"?: number | string;
+  "VITI I BOTIMIT"?: number | string;
+  "Viti i botimit"?: number | string;
   "Nr_Faqe"?: number | string;
+  "NR FAQE"?: number | string;
+  "Nr faqe"?: number | string;
   Cmimi?: string | number;
+  "CMIMI"?: string | number;
   Kategorizimi?: string;
+  "KATEGORIZIMI"?: string;
 }
 
 function App() {

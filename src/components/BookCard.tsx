@@ -1,24 +1,56 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt,  faFileAlt, faUser, faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faFileAlt, faUser, faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import './BookCard.css';
 
 interface BookCardProps {
   book: {
     "Nr."?: number | string;
+    "NR."?: number | string;
     Titulli?: string;
+    "TITULLI"?: string;
     Autori?: string;
+    "AUTORI"?: string;
     "Shtepia_Botuese"?: string;
+    "SHTEPIA BOTUESE"?: string;
+    "Shtepia botuese"?: string;
     Cmimi?: string | number;
+    "CMIMI"?: string | number;
     "Viti_I_Botimit"?: number | string;
+    "VITI I BOTIMIT"?: number | string;
+    "Viti i botimit"?: number | string;
     "Nr_Faqe"?: number | string;
+    "NR FAQE"?: number | string;
+    "Nr faqe"?: number | string;
     Kategorizimi?: string;
+    "KATEGORIZIMI"?: string;
   };
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {
+  // Helper function to get field value regardless of case, excluding "Jo" and variations
+  const getFieldValue = (field1: string | undefined, field2: string | undefined, field3?: string | undefined) => {
+    const isValidValue = (value: string | undefined) => {
+      if (!value) return false;
+      const trimmed = value.toString().trim();
+      return trimmed !== "" && trimmed.toLowerCase() !== "jo";
+    };
+    
+    const value1 = isValidValue(field1) ? field1 : undefined;
+    const value2 = isValidValue(field2) ? field2 : undefined;
+    const value3 = isValidValue(field3) ? field3 : undefined;
+    return value1 || value2 || value3;
+  };
+
+  const title = getFieldValue(book.Titulli, book.TITULLI);
+  const author = getFieldValue(book.Autori, book.AUTORI);
+  const publisher = getFieldValue(book["Shtepia_Botuese"], book["SHTEPIA BOTUESE"], book["Shtepia botuese"]);
+  const year = getFieldValue(book["Viti_I_Botimit"]?.toString(), book["VITI I BOTIMIT"]?.toString(), book["Viti i botimit"]?.toString());
+  const pages = getFieldValue(book["Nr_Faqe"]?.toString(), book["NR FAQE"]?.toString(), book["Nr faqe"]?.toString());
+  const price = getFieldValue(book.Cmimi?.toString(), book.CMIMI?.toString());
+
   return (
-    <div 
+    <div
       className="book-card"
       style={{
         background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
@@ -66,11 +98,11 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
         letterSpacing: '-0.025em'
       }}>
-        {book.Titulli}
+        {title || 'No Title'}
       </h3>
 
       {/* Author */}
-      {book.Autori && book.Autori !== "Jo" && (
+      {author && (
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -90,12 +122,12 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           }}>
             <FontAwesomeIcon icon={faUser} style={{ color: '#6366f1', fontSize: '14px' }} />
           </div>
-          <span>{book.Autori}</span>
+          <span>{author}</span>
         </div>
       )}
 
       {/* Publisher */}
-      {book["Shtepia_Botuese"] && book["Shtepia_Botuese"] !== "Jo" && (
+      {publisher && (
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -115,7 +147,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           }}>
             <FontAwesomeIcon icon={faBuilding} style={{ color: '#d97706', fontSize: '12px' }} />
           </div>
-          <span>{book["Shtepia_Botuese"]}</span>
+          <span>{publisher}</span>
         </div>
       )}
 
@@ -129,7 +161,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         borderTop: '1px solid #e2e8f0'
       }}>
         {/* Year */}
-        {book["Viti_I_Botimit"] && book["Viti_I_Botimit"] !== "Jo" && (
+        {year && (
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -149,12 +181,12 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
             }}>
               <FontAwesomeIcon icon={faCalendarAlt} style={{ color: '#059669', fontSize: '10px' }} />
             </div>
-            <span>{book["Viti_I_Botimit"]}</span>
+            <span>{year}</span>
           </div>
         )}
 
         {/* Pages */}
-        {book["Nr_Faqe"] && book["Nr_Faqe"] !== "Jo" && (
+        {pages && (
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -174,13 +206,13 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
             }}>
               <FontAwesomeIcon icon={faFileAlt} style={{ color: '#be185d', fontSize: '10px' }} />
             </div>
-            <span>{book["Nr_Faqe"]} faqe</span>
+            <span>{pages} faqe</span>
           </div>
         )}
       </div>
 
       {/* Price */}
-      {book.Cmimi && book.Cmimi !== "Jo" && (
+      {price && (
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -195,7 +227,7 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
           border: '1px solid #a7f3d0'
         }}>
           <FontAwesomeIcon icon={faMoneyBill} style={{ color: '#059669' }} />
-          <span>{book.Cmimi}</span>
+          <span>{price}</span>
         </div>
       )}
     </div>
