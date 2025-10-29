@@ -123,22 +123,11 @@ const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin, onClose }) => {
         </form>
 
         <div className="login-info">
-          <div className="info-section">
-            <h4>Demo Credentials:</h4>
-            <div className="credentials">
-              <div className="credential-item">
-                <strong>admin</strong> / donbosko2024
-              </div>
-              <div className="credential-item">
-                <strong>librarian</strong> / library123
-              </div>
-              <div className="credential-item">
-                <strong>teacher</strong> / school2024
-              </div>
-            </div>
-          </div>
           <p className="security-note">
             🔒 Secure authentication with 24-hour session
+          </p>
+          <p className="access-note">
+            Contact your system administrator for login credentials.
           </p>
         </div>
       </div>
