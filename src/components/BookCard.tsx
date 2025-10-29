@@ -1,30 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faFileAlt, faUser, faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import { Book } from '../utils/dataManager';
 import './BookCard.css';
 
 interface BookCardProps {
-  book: {
-    "Nr."?: number | string;
-    "NR."?: number | string;
-    Titulli?: string;
-    "TITULLI"?: string;
-    Autori?: string;
-    "AUTORI"?: string;
-    "Shtepia_Botuese"?: string;
-    "SHTEPIA BOTUESE"?: string;
-    "Shtepia botuese"?: string;
-    Cmimi?: string | number;
-    "CMIMI"?: string | number;
-    "Viti_I_Botimit"?: number | string;
-    "VITI I BOTIMIT"?: number | string;
-    "Viti i botimit"?: number | string;
-    "Nr_Faqe"?: number | string;
-    "NR FAQE"?: number | string;
-    "Nr faqe"?: number | string;
-    Kategorizimi?: string;
-    "KATEGORIZIMI"?: string;
-  };
+  book: Book;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book }) => {

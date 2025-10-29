@@ -2,49 +2,26 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import SHELF from '../assets/SHELF.jpg';
-
-import libraryData from '../assets/librat.json';
-
-interface Book {
-  "Nr."?: number | string;
-  "NR."?: number | string;
-  Titulli?: string;
-  "TITULLI"?: string;
-  Autori?: string;
-  "AUTORI"?: string;
-  "Shtepia_Botuese"?: string;
-  "SHTEPIA BOTUESE"?: string;
-  "Shtepia botuese"?: string;
-  "Viti_I_Botimit"?: number | string;
-  "VITI I BOTIMIT"?: number | string;
-  "Viti i botimit"?: number | string;
-  "Nr_Faqe"?: number | string;
-  "NR FAQE"?: number | string;
-  "Nr faqe"?: number | string;
-  Cmimi?: string | number;
-  "CMIMI"?: string | number;
-  Kategorizimi?: string;
-  "KATEGORIZIMI"?: string;
-}
+import { Book, LibraryData } from '../utils/dataManager';
 
 interface HeroSectionProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   resultsRef: React.RefObject<HTMLDivElement>;
-  setFilteredBooks: (books: any[]) => void;
+  setFilteredBooks: (books: Book[]) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
+  libraryData: LibraryData;
 }
 
-interface CategorizedBooks {
-  [key: string]: Book[];
-}
+
 
 const Hero: React.FC<HeroSectionProps> = ({ 
   setSearchQuery, 
   resultsRef,
   setFilteredBooks,
-  setSelectedCategory
+  setSelectedCategory,
+  libraryData
 }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -59,7 +36,7 @@ const Hero: React.FC<HeroSectionProps> = ({
     }
 
     const searchTerm = inputValue.toLowerCase().trim();
-    const allBooks = Object.values(libraryData as CategorizedBooks).flat();
+    const allBooks = Object.values(libraryData).flat();
     
     const filtered = allBooks.filter(book => 
       (book.Titulli || book.TITULLI)?.toLowerCase().includes(searchTerm) ||

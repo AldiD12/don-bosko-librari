@@ -1,45 +1,23 @@
 import React from 'react';
-import libraryData from '../assets/librat.json'; // Adjust the path as necessary
 import BookCard from './BookCard'; // Import the BookCard component
+import { Book, LibraryData } from '../utils/dataManager';
 import './BookList.css';
 
-// Define the Book interface
-interface Book {
-  "Nr."?: number | string;
-  "NR."?: number | string;
-  Titulli?: string;
-  "TITULLI"?: string;
-  Autori?: string;
-  "AUTORI"?: string;
-  "Shtepia_Botuese"?: string;
-  "SHTEPIA BOTUESE"?: string;
-  "Shtepia botuese"?: string;
-  "Viti_I_Botimit"?: number | string;
-  "VITI I BOTIMIT"?: number | string;
-  "Viti i botimit"?: number | string;
-  "Nr_Faqe"?: number | string;
-  "NR FAQE"?: number | string;
-  "Nr faqe"?: number | string;
-  Cmimi?: string | number;
-  "CMIMI"?: string | number;
-  Kategorizimi?: string;
-  "KATEGORIZIMI"?: string;
-}
 
-interface CategorizedBooks {
-  [key: string]: Book[];
-}
+
+
 
 interface BookListProps {
   initialBooks?: Book[];
   setFilteredBooks: React.Dispatch<React.SetStateAction<Book[]>>;
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  libraryData: LibraryData;
 }
 
 // Define the structure of categorizedBooks
-const BookList: React.FC<BookListProps> = ({ initialBooks = [], setFilteredBooks, selectedCategory, setSelectedCategory }) => {
-  const categorizedBooks = libraryData as unknown as CategorizedBooks;
+const BookList: React.FC<BookListProps> = ({ initialBooks = [], setFilteredBooks, selectedCategory, setSelectedCategory, libraryData }) => {
+  const categorizedBooks = libraryData;
 
   // Handle category change
   const handleCategoryChange = (category: string) => {
