@@ -1,5 +1,5 @@
 // Production data manager with GitHub integration
-import { LibraryData, Book } from './dataManager';
+import { LibraryData } from './dataManager';
 
 const GITHUB_API_BASE = 'https://api.github.com';
 const REPO_OWNER = process.env.REACT_APP_GITHUB_OWNER || 'AldiD12';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLogin from '../components/AdminLogin';
 import AdminPanel from '../components/AdminPanel';
 import NotificationSystem from '../components/NotificationSystem';
-import { getLibraryData, LibraryData, Book } from '../utils/dataManager';
+import { getLibraryData, LibraryData } from '../utils/dataManager';
 import { saveLibraryDataProduction, isProductionMode } from '../utils/productionDataManager';
 import './AdminPage.css';
 
